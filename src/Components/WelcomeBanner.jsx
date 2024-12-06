@@ -6,17 +6,18 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 const WelcomeBanner = () => {
   // Load the font using `useFonts`
   const [fontsLoaded] = useFonts({
-    DancingScript: require('../../assets/DancingScript-VariableFont_wght.ttf'), // Match the font name with the alias
+    DancingScript: require('../../assets/DancingScript-VariableFont_wght.ttf'),
   });
 
   return (
-    <View>
+    <View style={{}}>
       <View
         style={{
           justifyContent: 'space-evenly',
           alignItems: 'center',
           marginTop: 20,
           flexDirection: 'row',
+          marginBottom: 10,
         }}
       >
         <Text
@@ -24,10 +25,8 @@ const WelcomeBanner = () => {
             fontSize: 60,
             fontFamily: 'DancingScript',
             color: 'red',
-            marginRight: 70,
+            marginRight: 130,
             marginTop: 10,
-
-            // Use the loaded font
           }}
         >
           Welcome
@@ -38,11 +37,11 @@ const WelcomeBanner = () => {
         </TouchableOpacity>
       </View>
 
-      <View>
+      <View style={{ marginLeft: 20 }}>
         <TextInput
-          placeholder="Search Workout by target musclessssss"
+          placeholder="Search Workout by target muscles"
           style={{
-            backgroundColor: 'red',
+            backgroundColor: 'transparent',
             height: 50,
             width: 300,
             borderWidth: 5,

@@ -1,16 +1,23 @@
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { Equipments } from '../Constants';
-import MyImageViewer from './MyImageViewer';
+import EquipmentsImages from './EquipmentsImages';
 
 const ExerciseCategory = () => {
   return (
-    <View style={{ marginHorizontal: 10, marginTop: 20 }}>
+    <View
+      style={{
+        marginHorizontal: 10,
+        marginTop: 20,
+
+        marginBottom: 40,
+      }}
+    >
       <Text
-        style={{ marginVertical: 10, fontSize: 30, marginLeft: 10 }}
+        style={{ marginVertical: 15, fontSize: 30, marginLeft: 10 }}
         className="font-thin"
       >
-        Choose-Equipment
+        Choose Equipment
       </Text>
       <FlatList
         data={Equipments}
@@ -18,16 +25,7 @@ const ExerciseCategory = () => {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => {
-          return (
-            <View className="">
-              <View className="rounded-l-xl mx-6 h-80">
-                <MyImageViewer
-                  name={item}
-                  prompt={'Gym Workout Equipment' + item}
-                />
-              </View>
-            </View>
-          );
+          return <EquipmentsImages equip={item} />;
         }}
       />
     </View>

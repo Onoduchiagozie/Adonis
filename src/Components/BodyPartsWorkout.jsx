@@ -9,25 +9,22 @@ const BodyPartsWorkout = ({}) => {
   const navigation = useNavigation();
   return (
     <View className="" style={{}}>
-      <Text
-        className="font-semibold underline"
-        style={{ fontSize: 30, marginTop: 20, marginLeft: 25 }}
-      >
-        Body-Parts-list
+      <Text className=" text-center font-thin" style={{ fontSize: 30 }}>
+        Body Workout
       </Text>
+
       <View
         style={{
           justifyContent: 'center',
           alignItems: 'center',
-          marginTop: 10,
-          flexWrap: 'wrap',
+          marginTop: 30,
         }}
       >
         <FlatList
           data={BodyParts}
           keyExtractor={(name) => name.toString()}
-          numColumns={2}
           showsVerticalScrollIndicator={false}
+          numColumns={2}
           contentContainerStyle={{}}
           renderItem={({ item }) => {
             return <BodyPartsImages givenImage={item} />;

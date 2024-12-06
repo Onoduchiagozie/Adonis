@@ -42,25 +42,89 @@ export const BodyParts = [
 ];
 
 export const Equipments = [
-  'band',
-  'barbell',
-  'body weight',
-  'bosu ball',
-  'cable',
-  'dumbbell',
-  'hammer',
-  'kettlebell',
-  'leverage machine',
-  'resistance band',
-  'roller',
-
-  'sled machine',
-  'smith machine',
-  'stability ball',
-  'stationary bike',
-  'stepmill machine',
-  'tire',
-  'wheel roller',
+  { name: 'band', imagePath: require('../assets/images/Equipments/Bands.jpg') },
+  {
+    name: 'barbell',
+    imagePath: require('../assets/images/Equipments/barbell.jpg'),
+  },
+  {
+    name: 'body weight',
+    imagePath: require('../assets/images/Equipments/body_weight.jpg'),
+  },
+  {
+    name: 'bosu ball',
+    imagePath: require('../assets/images/Equipments/Bosu_ball.jpg'),
+  },
+  { name: 'rope', imagePath: require('../assets/images/Equipments/Rope.jpg') },
+  {
+    name: 'ez barbell',
+    imagePath: require('../assets/images/Equipments/Olmpyic barbell.jpg'),
+  },
+  {
+    name: 'cable',
+    imagePath: require('../assets/images/Equipments/Cable.jpg'),
+  },
+  {
+    name: 'dumbbell',
+    imagePath: require('../assets/images/Equipments/dumbells.jpg'),
+  },
+  {
+    name: 'hammer',
+    imagePath: require('../assets/images/Equipments/Hammer.jpg'),
+  },
+  {
+    name: 'trap bar',
+    imagePath: require('../assets/images/Equipments/TrapBar.jpg'),
+  },
+  {
+    name: 'weighted',
+    imagePath: require('../assets/images/Equipments/weightedvest.jpg'),
+  },
+  {
+    name: 'kettlebell',
+    imagePath: require('../assets/images/Equipments/kettlebell.jpg'),
+  },
+  {
+    name: 'leverage machine',
+    imagePath: require('../assets/images/Equipments/LeverageMachine.jpg'),
+  },
+  {
+    name: 'olympic barbell',
+    imagePath: require('../assets/images/Equipments/Olmpyic barbell.jpg'),
+  },
+  {
+    name: 'resistance band',
+    imagePath: require('../assets/images/Equipments/Bands.jpg'),
+  },
+  {
+    name: 'roller',
+    imagePath: require('../assets/images/Equipments/Rollers.jpg'),
+  },
+  {
+    name: 'medicine ball',
+    imagePath: require('../assets/images/Equipments/fitness_medicine_ball.jpg'),
+  },
+  {
+    name: 'sled machine',
+    imagePath: require('../assets/images/Equipments/sledMachine.jpg'),
+  },
+  {
+    name: 'smith machine',
+    imagePath: require('../assets/images/Equipments/smithMachine.jpg'),
+  },
+  {
+    name: 'elliptical machine',
+    imagePath: require('../assets/images/Equipments/Elliptical_Machine.jpg'),
+  },
+  {
+    name: 'stationary bike',
+    imagePath: require('../assets/images/Equipments/stationaryBike.jpg'),
+  },
+  {
+    name: 'stepmill machine',
+    imagePath: require('../assets/images/Equipments/stepMill.jpg'),
+  },
+  { name: 'tire', imagePath: require('../assets/images/Equipments/Tire.jpg') },
 ];
 
 export const restaurants = [
@@ -352,3 +416,6 @@ export const restaurants = [
     reviews: [],
   },
 ];
+
+export const ExcerciseDB_API_KEY =
+  'efbbf9641cmsh31c8cee6dcedda0p1ff29fjsn1e1c07bad08d';

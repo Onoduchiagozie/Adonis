@@ -8,12 +8,11 @@ import { ScrollView } from 'react-native-virtualized-view';
 function HomeScreen(props) {
   return (
     <ScrollView style={{ flex: 1 }}>
-      <View className="" style={{ backgroundColor: 'grey' }}>
+      <View className="" style={{ backgroundColor: 'transparent' }}>
         <WelcomeBanner />
         <ExerciseCategory />
 
         <BodyPartsWorkout />
-        {/*<BodyPartExerciseList/>*/}
       </View>
     </ScrollView>
   );

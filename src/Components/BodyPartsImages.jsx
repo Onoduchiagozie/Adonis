@@ -10,7 +10,7 @@ const BodyPartsImages = ({ givenImage }) => {
       <TouchableOpacity
         onPress={() =>
           navigation.navigate('BodyPartExerciseList', {
-            bodyPart: givenImage.name,
+            workout: givenImage,
           })
         }
       >
@@ -18,15 +18,17 @@ const BodyPartsImages = ({ givenImage }) => {
           source={givenImage.imagePath}
           className=" h-52 w-44"
           style={{
-            resizeMode: 'cover',
+            resizeMode: 'stretch',
             backgroundColor: 'transparent',
             borderWidth: 5,
             borderRadius: 5,
             marginTop: 20,
-            marginHorizontal: 20,
+            marginHorizontal: 25,
           }}
         />
-        <Text className="text-center">{givenImage.name}</Text>
+        <Text className="text-center underline" style={{ marginVertical: 10 }}>
+          {givenImage.name}
+        </Text>
       </TouchableOpacity>
     </View>
   );
