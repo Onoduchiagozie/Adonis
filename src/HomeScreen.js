@@ -4,14 +4,14 @@ import WelcomeBanner from './Components/WelcomeBanner';
 import ExerciseCategory from './Components/ExerciseCategory';
 import BodyPartsWorkout from './Components/BodyPartsWorkout';
 import { ScrollView } from 'react-native-virtualized-view';
+import LinearGradient from 'react-native-linear-gradient';
 
 function HomeScreen(props) {
   return (
-    <ScrollView style={{ flex: 1 }}>
-      <View className="" style={{ backgroundColor: 'transparent' }}>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <View className="flex-1">
         <WelcomeBanner />
         <ExerciseCategory />
-
         <BodyPartsWorkout />
       </View>
     </ScrollView>

@@ -1,130 +1,205 @@
 export const BodyParts = [
   {
+    id: 1,
     name: 'Back',
+    selection: 'bodyPart',
     imagePath: require('../assets/images/bodyParts/back2.jpg'),
   },
   {
+    id: 2,
     name: 'Cardio',
+    selection: 'bodyPart',
     imagePath: require('../assets/images/bodyParts/Cardio.jpg'),
   },
   {
+    id: 3,
     name: 'Chest',
+    selection: 'bodyPart',
     imagePath: require('../assets/images/bodyParts/chests.jpg'),
   },
   {
+    id: 4,
     name: 'Lower Arms',
+    selection: 'bodyPart',
     imagePath: require('../assets/images/bodyParts/LowerArm.jpg'),
   },
   {
+    id: 5,
     name: 'Lower Legs',
+    selection: 'bodyPart',
     imagePath: require('../assets/images/bodyParts/lower_legs2.jpg'),
   },
   {
+    id: 6,
     name: 'Neck',
+    selection: 'bodyPart',
     imagePath: require('../assets/images/bodyParts/wide-neck.jpg'),
   },
   {
+    id: 7,
     name: 'Shoulders',
+    selection: 'bodyPart',
     imagePath: require('../assets/images/bodyParts/shoulders.jpg'),
   },
   {
+    id: 8,
     name: 'Upper Arms',
+    selection: 'bodyPart',
     imagePath: require('../assets/images/bodyParts/uppper_fore_Arms.webp'),
   },
   {
+    id: 9,
     name: 'Upper Legs',
+    selection: 'bodyPart',
     imagePath: require('../assets/images/bodyParts/upper_legs.jpg'),
   },
   {
+    id: 10,
     name: 'Waist',
+    selection: 'bodyPart',
     imagePath: require('../assets/images/bodyParts/waist2.jpg'),
   },
 ];
 
 export const Equipments = [
-  { name: 'band', imagePath: require('../assets/images/Equipments/Bands.jpg') },
   {
-    name: 'barbell',
-    imagePath: require('../assets/images/Equipments/barbell.jpg'),
-  },
-  {
-    name: 'body weight',
-    imagePath: require('../assets/images/Equipments/body_weight.jpg'),
-  },
-  {
-    name: 'bosu ball',
-    imagePath: require('../assets/images/Equipments/Bosu_ball.jpg'),
-  },
-  { name: 'rope', imagePath: require('../assets/images/Equipments/Rope.jpg') },
-  {
-    name: 'ez barbell',
-    imagePath: require('../assets/images/Equipments/Olmpyic barbell.jpg'),
-  },
-  {
-    name: 'cable',
-    imagePath: require('../assets/images/Equipments/Cable.jpg'),
-  },
-  {
-    name: 'dumbbell',
-    imagePath: require('../assets/images/Equipments/dumbells.jpg'),
-  },
-  {
-    name: 'hammer',
-    imagePath: require('../assets/images/Equipments/Hammer.jpg'),
-  },
-  {
-    name: 'trap bar',
-    imagePath: require('../assets/images/Equipments/TrapBar.jpg'),
-  },
-  {
-    name: 'weighted',
-    imagePath: require('../assets/images/Equipments/weightedvest.jpg'),
-  },
-  {
-    name: 'kettlebell',
-    imagePath: require('../assets/images/Equipments/kettlebell.jpg'),
-  },
-  {
-    name: 'leverage machine',
-    imagePath: require('../assets/images/Equipments/LeverageMachine.jpg'),
-  },
-  {
-    name: 'olympic barbell',
-    imagePath: require('../assets/images/Equipments/Olmpyic barbell.jpg'),
-  },
-  {
-    name: 'resistance band',
+    id: 1,
+    name: 'band',
+    selection: 'equipment',
     imagePath: require('../assets/images/Equipments/Bands.jpg'),
   },
   {
+    id: 2,
+    name: 'barbell',
+    selection: 'equipment',
+    imagePath: require('../assets/images/Equipments/barbell.jpg'),
+  },
+  {
+    id: 3,
+    name: 'body weight',
+    selection: 'equipment',
+    imagePath: require('../assets/images/Equipments/body_weight.jpg'),
+  },
+  {
+    id: 4,
+    name: 'bosu ball',
+    selection: 'equipment',
+    imagePath: require('../assets/images/Equipments/Bosu_ball.jpg'),
+  },
+  {
+    id: 5,
+    name: 'rope',
+    selection: 'equipment',
+    imagePath: require('../assets/images/Equipments/Rope.jpg'),
+  },
+  {
+    id: 6,
+    name: 'ez barbell',
+    selection: 'equipment',
+    imagePath: require('../assets/images/Equipments/Olmpyic barbell.jpg'),
+  },
+  {
+    id: 7,
+    name: 'cable',
+    selection: 'equipment',
+    imagePath: require('../assets/images/Equipments/Cable.jpg'),
+  },
+  {
+    id: 8,
+    name: 'dumbbell',
+    selection: 'equipment',
+    imagePath: require('../assets/images/Equipments/dumbells.jpg'),
+  },
+  {
+    id: 9,
+    name: 'hammer',
+    selection: 'equipment',
+    imagePath: require('../assets/images/Equipments/Hammer.jpg'),
+  },
+  {
+    id: 10,
+    name: 'trap bar',
+    selection: 'equipment',
+    imagePath: require('../assets/images/Equipments/TrapBar.jpg'),
+  },
+  {
+    id: 11,
+    name: 'weighted',
+    selection: 'equipment',
+    imagePath: require('../assets/images/Equipments/weightedvest.jpg'),
+  },
+  {
+    id: 12,
+    name: 'kettlebell',
+    selection: 'equipment',
+    imagePath: require('../assets/images/Equipments/kettlebell.jpg'),
+  },
+  {
+    id: 13,
+    name: 'leverage machine',
+    selection: 'equipment',
+    imagePath: require('../assets/images/Equipments/LeverageMachine.jpg'),
+  },
+  {
+    id: 14,
+    name: 'olympic barbell',
+    selection: 'equipment',
+    imagePath: require('../assets/images/Equipments/Olmpyic barbell.jpg'),
+  },
+  {
+    id: 15,
+    name: 'resistance band',
+    selection: 'equipment',
+    imagePath: require('../assets/images/Equipments/Bands.jpg'),
+  },
+  {
+    id: 16,
     name: 'roller',
+    selection: 'equipment',
     imagePath: require('../assets/images/Equipments/Rollers.jpg'),
   },
   {
+    id: 17,
     name: 'medicine ball',
+    selection: 'equipment',
     imagePath: require('../assets/images/Equipments/fitness_medicine_ball.jpg'),
   },
   {
+    id: 18,
     name: 'sled machine',
+    selection: 'equipment',
     imagePath: require('../assets/images/Equipments/sledMachine.jpg'),
   },
   {
+    id: 19,
     name: 'smith machine',
+    selection: 'equipment',
     imagePath: require('../assets/images/Equipments/smithMachine.jpg'),
   },
   {
+    id: 20,
     name: 'elliptical machine',
+    selection: 'equipment',
     imagePath: require('../assets/images/Equipments/Elliptical_Machine.jpg'),
   },
   {
+    id: 21,
     name: 'stationary bike',
+    selection: 'equipment',
     imagePath: require('../assets/images/Equipments/stationaryBike.jpg'),
   },
   {
+    id: 22,
     name: 'stepmill machine',
+    selection: 'equipment',
     imagePath: require('../assets/images/Equipments/stepMill.jpg'),
   },
-  { name: 'tire', imagePath: require('../assets/images/Equipments/Tire.jpg') },
+  {
+    id: 23,
+    name: 'tire',
+    selection: 'equipment',
+    imagePath: require('../assets/images/Equipments/Tire.jpg'),
+  },
 ];
 
 export const restaurants = [

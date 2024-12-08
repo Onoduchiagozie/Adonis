@@ -21,7 +21,7 @@ const ExerciseCategory = () => {
       </Text>
       <FlatList
         data={Equipments}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item) => item.id || item.name}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => {

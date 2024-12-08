@@ -1,144 +1,134 @@
-import React from 'react';
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
-import { restaurants } from '../Constants';
+import React, { useEffect, useState } from 'react';
+import {
+  FlatList,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+  ActivityIndicator,
+} from 'react-native';
+import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import { ScrollView } from 'react-native-virtualized-view';
+import { ExcerciseDB_API_KEY } from '../Constants';
 
-const BodyPartExerciseList = () => {
+const BodyPartExerciseList = ({ route }) => {
   const navigation = useNavigation();
-  return (
-    <View>
-      <View style={{ marginTop: 30 }} className="mt-6">
-        <Image
-          source={require('../../assets/224.jpg')}
-          style={{ margin: 10, width: '95%', height: '25%', borderRadius: 10 }}
-        />
-        <Text style={{ fontSize: 30, marginTop: 20, marginLeft: 20 }}>
-          API Gotten Exercises list range
-        </Text>
+  const { workout } = route.params;
 
-        <FlatList
-          data={restaurants}
-          keyExtractor={(name) => name}
-          numColumns={2}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity
-                className=""
-                onPress={() => navigation.navigate('ExerciseDetails')}
-              >
-                <Image
-                  source={require('../../assets/224.jpg')}
-                  resizeMode="cover"
-                  style={{
-                    borderWidth: 2,
-                    borderColor: 'rgba(255,255,255,0.64)',
-                    height: 250,
-                    width: 160,
-                    borderRadius: 10, // Circular shape
-                    marginTop: 20,
-                    marginHorizontal: 20,
-                  }}
-                />
-                <Text style={{ marginHorizontal: 30 }}>{item.name}</Text>
-              </TouchableOpacity>
-            );
+  // State to store exercises fetched from the API
+  const [exercises, setExercises] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Function to fetch data from the API
+    const fetchExercises = async () => {
+      const options = {
+        method: 'GET',
+        url: `https://exercisedb.p.rapidapi.com/exercises/${encodeURIComponent(workout.selection)}/${encodeURIComponent(workout.name)}`,
+        headers: {
+          'x-rapidapi-key': ExcerciseDB_API_KEY,
+          'x-rapidapi-host': 'exercisedb.p.rapidapi.com',
+        },
+      };
+
+      try {
+        const response = await axios.request(options);
+        setExercises(response.data); // Store fetched data in state
+      } catch (error) {
+        console.error('Error fetching exercises:', error);
+      } finally {
+        setLoading(false); // Hide loader once request completes
+      }
+    };
+
+    fetchExercises();
+  }, [workout.name]); // Dependency array ensures the API is called when `workout.name` changes
+
+  return (
+    <ScrollView style={{ backgroundColor: 'grey', marginRight: 1 }}>
+      <View style={{ marginTop: 60, flex: 1 }} className="mt-6">
+        <Image
+          source={workout.imagePath}
+          style={{
+            margin: 10,
+            width: '95%',
+            height: '15%',
+            borderRadius: 10,
+            borderColor: 'ash',
+            borderWidth: 5,
           }}
         />
+        <Text style={{ fontSize: 30, marginTop: 20, marginLeft: 20 }}>
+          {exercises.length} {/* Adding a space here */}
+          {workout.name
+            .split(' ') // Split into words
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
+            .join(' ')}{' '}
+          Workouts
+        </Text>
+
+        {loading ? (
+          <ActivityIndicator color={'white'} size={'large'} />
+        ) : (
+          <FlatList
+            data={exercises}
+            className=""
+            keyExtractor={(item) => item.id || item.name || `${item.gifUrl}`}
+            numColumns={2}
+            style={{ marginHorizontal: 20 }}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={{
+                  alignItems: 'center',
+                }}
+                onPress={() => {
+                  console.log(item);
+                  // {"bodyPart": "back", "equipment": "barbell", "gifUrl": "https://v2.exercisedb.io/image/Ma-WDKWCNm45ed", "id": "0022", "instruc
+                  //   tions": ["Lie flat on a bench with your head at one end and your feet on the ground.", "Hold the barbell with a pronated grip (palms facing awa
+                  //   y from you) and extend your arms straight above your chest.", "Keeping your arms straight, lower the barbell behind your head in an arc-like mo
+                  //   tion until you feel a stretch in your lats.", "Pause for a moment, then reverse the motion and press the barbell back to the starting position
+                  //   above your chest.", "Repeat for the desired number of repetitions."], "name": "barbell pullover to press", "secondaryMuscles": ["triceps", "chest", "shoulders"], "target": "lats"}
+                  navigation.navigate('ExerciseDetails', { exercise: item });
+                }}
+              >
+                <Image
+                  source={{ uri: item.gifUrl }} // Use image from the API response
+                  resizeMode="stretch"
+                  style={{
+                    borderWidth: 2,
+                    borderColor: 'ash',
+                    height: 300,
+                    width: 170,
+                    borderRadius: 10,
+                    marginTop: 20,
+                  }}
+                />
+
+                <Text className="text-center" style={{ marginHorizontal: 30 }}>
+                  {item.name.length > 15
+                    ? `${item.name
+                        .split(' ')
+                        .map(
+                          (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                        )
+                        .join(' ')
+                        .slice(0, 15)}...`
+                    : item.name
+                        .split(' ')
+                        .map(
+                          (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                        )
+                        .join(' ')}
+                </Text>
+              </TouchableOpacity>
+            )}
+          />
+        )}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 export default BodyPartExerciseList;
-
-// //PAGE FOR RENDERING CHOSEN  EXERCISE  CATEGORY TYPES
-//
-// import React, { useState } from 'react';
-// import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
-// import { restaurants, ExcerciseDB_API_KEY } from '../Constants';
-// import { useNavigation } from '@react-navigation/native';
-// import { ScrollView } from 'react-native-virtualized-view';
-// import axios from 'axios';
-//
-// const BodyPartExerciseList = ({ route }) => {
-//   const [gottenWorkout, setGottenWorkout] = useState([]);
-//
-//   const { workout } = route.params;
-//
-//   const navigation = useNavigation();
-//
-//   const options = {
-//     method: 'GET',
-//     url: `https://exercisedb.p.rapidapi.com/exercises/equipment/${workout.name}`,
-//     params: {
-//       limit: '15',
-//       offset: '0',
-//     },
-//     headers: {
-//       'x-rapidapi-key': ExcerciseDB_API_KEY,
-//       'x-rapidapi-host': 'exercisedb.p.rapidapi.com',
-//     },
-//   };
-//
-//   try {
-//     const response = axios.request(options);
-//
-//     console.log(response.data);
-//   } catch (error) {
-//     console.error(error);
-//   }
-//
-//   return (
-//     <ScrollView>
-//       <View
-//         style={{ marginTop: 30, backgroundColor: 'green' }}
-//         className="mt-6"
-//       >
-//         <Image
-//           source={workout.imagePath}
-//           style={{
-//             margin: 10,
-//             width: '95%',
-//             height: '10%',
-//             borderRadius: 10,
-//             resizeMode: 'stretch',
-//           }}
-//         />
-//         <Text style={{ fontSize: 30, marginVertical: 20, marginLeft: 20 }}>
-//           {workout.name} Workouts
-//         </Text>
-//
-//         <FlatList
-//           data={gottenWorkout}
-//           keyExtractor={(item) => item.name}
-//           numColumns={2}
-//           renderItem={({ item }) => {
-//             return (
-//               <TouchableOpacity
-//                 className=""
-//                 onPress={() => navigation.navigate('ExerciseDetails')}
-//               >
-//                 <Image
-//                   source={require('../../assets/224.jpg')}
-//                   resizeMode="cover"
-//                   style={{
-//                     borderWidth: 2,
-//                     borderColor: 'rgba(255,255,255,0.64)',
-//                     height: 250,
-//                     width: 160,
-//                     borderRadius: 10, // Circular shape
-//                     marginTop: 20,
-//                     marginHorizontal: 20,
-//                   }}
-//                 />
-//                 <Text style={{ marginHorizontal: 30 }}>{item.name}</Text>
-//               </TouchableOpacity>
-//             );
-//           }}
-//         />
-//       </View>
-//     </ScrollView>
-//   );
-// };
-//
-// export default BodyPartExerciseList;

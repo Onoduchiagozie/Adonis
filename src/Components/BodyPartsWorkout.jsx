@@ -22,7 +22,7 @@ const BodyPartsWorkout = ({}) => {
       >
         <FlatList
           data={BodyParts}
-          keyExtractor={(name) => name.toString()}
+          keyExtractor={(item) => item.id || item.name}
           showsVerticalScrollIndicator={false}
           numColumns={2}
           contentContainerStyle={{}}

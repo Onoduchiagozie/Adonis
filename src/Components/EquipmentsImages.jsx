@@ -28,15 +28,15 @@ const EquipmentsImages = ({ equip }) => {
             resizeMode: 'stretch',
           }}
         />
+
         <Text
           className="text-center"
-          style={{
-            marginLeft: 10,
-            marginTop: 15,
-            fontSize: 17,
-          }}
+          style={{ marginLeft: 10, marginTop: 15, fontSize: 17 }}
         >
-          {equip.name}
+          {equip.name
+            .split(' ')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')}
         </Text>
       </TouchableOpacity>
     </View>
