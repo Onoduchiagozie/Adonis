@@ -1,19 +1,27 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const ExerciseDetails = ({ route }) => {
   const { exercise } = route.params;
   return (
-    <View
-      style={{ justifyContent: 'center', alignItems: 'center', margin: 50 }}
+    <LinearGradient
+      colors={['#d7d2cc', '#304352']}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      style={{ flex: 1 }}
     >
-      <Text>{exercise.name}</Text>
-      <Image
-        source={{ uri: exercise.gifUrl }}
-        style={{ height: 400, width: 250 }}
-        resizeMode="stretch"
-      />
-    </View>
+      <View
+        style={{ justifyContent: 'center', alignItems: 'center', margin: 50 }}
+      >
+        <Text>{exercise.name}</Text>
+        <Image
+          source={{ uri: exercise.gifUrl }}
+          style={{ height: 400, width: 250 }}
+          resizeMode="stretch"
+        />
+      </View>
+    </LinearGradient>
   );
 };
 

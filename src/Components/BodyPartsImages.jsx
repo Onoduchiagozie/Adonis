@@ -26,7 +26,14 @@ const BodyPartsImages = ({ givenImage }) => {
             marginHorizontal: 25,
           }}
         />
-        <Text className="text-center underline" style={{ marginVertical: 10 }}>
+        <Text
+          className="text-center "
+          style={{
+            marginVertical: 10,
+            fontFamily: 'MouseMemoir',
+            fontSize: 24,
+          }}
+        >
           {givenImage.name}
         </Text>
       </TouchableOpacity>

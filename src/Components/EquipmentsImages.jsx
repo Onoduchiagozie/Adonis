@@ -31,7 +31,12 @@ const EquipmentsImages = ({ equip }) => {
 
         <Text
           className="text-center"
-          style={{ marginLeft: 10, marginTop: 15, fontSize: 17 }}
+          style={{
+            marginLeft: 10,
+            marginTop: 15,
+            fontSize: 24,
+            fontFamily: 'MouseMemoir',
+          }}
         >
           {equip.name
             .split(' ')

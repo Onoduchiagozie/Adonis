@@ -5,9 +5,6 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 const WelcomeBanner = () => {
   // Load the font using `useFonts`
-  const [fontsLoaded] = useFonts({
-    DancingScript: require('../../assets/DancingScript-VariableFont_wght.ttf'),
-  });
 
   return (
     <View style={{}}>
@@ -23,7 +20,7 @@ const WelcomeBanner = () => {
         <Text
           style={{
             fontSize: 60,
-            fontFamily: 'DancingScript',
+            fontFamily: 'Dancing Script',
             color: 'red',
             marginRight: 130,
             marginTop: 10,

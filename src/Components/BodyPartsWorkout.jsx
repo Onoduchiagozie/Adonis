@@ -9,8 +9,12 @@ const BodyPartsWorkout = ({}) => {
   const navigation = useNavigation();
   return (
     <View className="" style={{}}>
-      <Text className=" text-center font-thin" style={{ fontSize: 30 }}>
-        Body Workout
+      <Text
+        className=" text-center  italic "
+        style={{ fontSize: 30, fontWeight: 'bold' }}
+      >
+        Body
+        <Text style={{ color: 'red' }}> Workout </Text>
       </Text>
 
       <View
