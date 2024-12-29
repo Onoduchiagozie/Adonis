@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import {
   FlatList,
-  Image,
   Text,
   TouchableOpacity,
   View,
   ActivityIndicator,
 } from 'react-native';
+import { Image, ImageBackground } from 'expo-image';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { ScrollView } from 'react-native-virtualized-view';
@@ -48,13 +48,25 @@ const BodyPartExerciseList = ({ route }) => {
 
   return (
     <LinearGradient
-      colors={['#d7d2cc', '#304352']}
+      colors={['rgba(255,255,255,0.64)', 'rgb(25,49,62)']}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 0 }}
       style={{ flex: 1 }}
     >
-      <ScrollView style={{ marginRight: 1 }}>
-        <View style={{ marginTop: 60, flex: 1 }} className="mt-6">
+      <ScrollView>
+        <View style={{ marginTop: 50, flex: 1 }} className="mt-6">
+          <Text
+            className="text-center "
+            style={{
+              fontSize: 30,
+              fontWeight: 'bold',
+              color: 'indigo',
+              fontFamily: 'MouseMemoir',
+              marginLeft: 20,
+            }}
+          >
+            Select
+          </Text>
           <Image
             source={workout.imagePath}
             style={{
@@ -66,12 +78,21 @@ const BodyPartExerciseList = ({ route }) => {
               borderWidth: 5,
             }}
           />
-          <Text style={{ fontSize: 30, marginTop: 20, marginLeft: 20 }}>
+          <Text
+            style={{
+              fontSize: 30,
+              marginTop: 20,
+              marginLeft: 20,
+              fontFamily: 'Oswald',
+              fontWeight: 'bold',
+            }}
+          >
             {exercises.length}{' '}
             <Text style={{ color: 'indigo' }}>
               {workout.name
                 .split(' ') // Split into words
-                .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                // Capitalize each word
                 .join(' ')}{' '}
             </Text>
             Workouts
@@ -82,16 +103,18 @@ const BodyPartExerciseList = ({ route }) => {
           ) : (
             <FlatList
               data={exercises}
-              className=""
               keyExtractor={(item) => item.id || item.name || `${item.gifUrl}`}
               numColumns={2}
-              style={{ marginHorizontal: 20 }}
+              style={{
+                marginHorizontal: 20,
+                paddingBottom: 400,
+                borderRadius: 10,
+              }}
               showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (
                 <TouchableOpacity
                   style={{
                     alignItems: 'center',
-
                     justifyContent: 'space-around',
                   }}
                   onPress={() => {
@@ -104,11 +127,11 @@ const BodyPartExerciseList = ({ route }) => {
                     navigation.navigate('ExerciseDetails', { exercise: item });
                   }}
                 >
-                  <Image
+                  <ImageBackground
                     source={{ uri: item.gifUrl }} // Use image from the API response
                     resizeMode="stretch"
                     style={{
-                      borderWidth: 2,
+                      borderWidth: 4,
                       borderColor: '#000435',
                       height: 300,
                       width: 170,
@@ -124,6 +147,7 @@ const BodyPartExerciseList = ({ route }) => {
                     style={{
                       marginHorizontal: 30,
                       fontFamily: 'MouseMemoir',
+                      fontSize: 20,
                     }}
                   >
                     {item.name.length > 15

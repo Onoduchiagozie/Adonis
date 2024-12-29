@@ -26,15 +26,18 @@ const BodyPartsImages = ({ givenImage }) => {
             marginHorizontal: 25,
           }}
         />
+
         <Text
-          className="text-center "
           style={{
-            marginVertical: 10,
             fontFamily: 'MouseMemoir',
             fontSize: 24,
           }}
+          className="text-center "
         >
-          {givenImage.name}
+          {givenImage.name
+            .split(' ') // Split into words
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
+            .join(' ')}{' '}
         </Text>
       </TouchableOpacity>
     </View>

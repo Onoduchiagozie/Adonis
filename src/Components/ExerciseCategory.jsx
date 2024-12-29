@@ -15,7 +15,6 @@ const ExerciseCategory = () => {
         marginHorizontal: 10,
         marginTop: 20,
         marginBottom: 40,
-        fontFamily: 'Dancing Script',
       }}
     >
       {/*<Text*/}

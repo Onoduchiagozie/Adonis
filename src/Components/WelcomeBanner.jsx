@@ -20,7 +20,7 @@ const WelcomeBanner = () => {
         <Text
           style={{
             fontSize: 60,
-            fontFamily: 'Dancing Script',
+            fontFamily: 'DancingScript',
             color: 'red',
             marginRight: 130,
             marginTop: 10,

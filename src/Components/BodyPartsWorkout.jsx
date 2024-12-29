@@ -22,6 +22,7 @@ const BodyPartsWorkout = ({}) => {
           justifyContent: 'center',
           alignItems: 'center',
           marginTop: 30,
+          paddingBottom: 30,
         }}
       >
         <FlatList
