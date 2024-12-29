@@ -8,7 +8,7 @@ export default function TimerScreen({ navigation }) {
         <Text
           style={{ fontFamily: 'Helvetica', fontSize: 20, marginBottom: 10 }}
         >
-          This is Helvetica (iOS only).
+          This is Helvetica (iOS only). test screeen for fonts
         </Text>
         <Text style={{ fontFamily: 'Courier', fontSize: 20, marginBottom: 10 }}>
           This is Courier (Monospace).
