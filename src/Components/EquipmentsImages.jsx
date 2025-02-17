@@ -10,7 +10,7 @@ const BASE_URL = 'https://api.freepik.com/v1/ai/text-to-image';
 const EquipmentsImages = ({ equip }) => {
   const navigation = useNavigation();
   return (
-    <View style={{}} className="rounded-3xl mx-6 h-64 ">
+    <View style={{}} className="rounded-4xl mx-2 ">
       <TouchableOpacity
         onPress={() =>
           navigation.navigate('BodyPartExerciseList', {
@@ -20,20 +20,22 @@ const EquipmentsImages = ({ equip }) => {
       >
         <Image
           source={equip.imagePath}
-          className="h-44 w-80"
+          className="h-72 w-96"
           style={{
             marginTop: 10,
             borderWidth: 5,
             borderRadius: 5,
+            width: '370',
             resizeMode: 'stretch',
+            marginLeft: 10,
           }}
         />
 
         <Text
-          className="text-center"
+          className="text-center my-2"
           style={{
             marginLeft: 10,
-            marginTop: 15,
+
             fontSize: 24,
             fontFamily: 'MouseMemoir',
           }}

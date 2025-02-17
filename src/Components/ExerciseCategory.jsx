@@ -17,19 +17,8 @@ const ExerciseCategory = () => {
         marginBottom: 40,
       }}
     >
-      {/*<Text*/}
-      {/*  style={{*/}
-      {/*    marginVertical: 15,*/}
-      {/*    fontSize: 30,*/}
-      {/*    marginLeft: 10,*/}
-      {/*  }}*/}
-      {/*  className=""*/}
-      {/*>*/}
-      {/*  Choose Equipment*/}
-      {/*</Text>*/}
-
       <Text
-        className=" italic"
+        className="italic text-center"
         style={{
           fontSize: 26,
           fontWeight: 'bold',

@@ -19,10 +19,10 @@ const BodyPartsWorkout = ({}) => {
 
       <View
         style={{
-          justifyContent: 'center',
           alignItems: 'center',
-          marginTop: 30,
-          paddingBottom: 30,
+          justifyContent: 'center',
+          marginTop: 20,
+          paddingBottom: 100,
         }}
       >
         <FlatList
@@ -31,6 +31,7 @@ const BodyPartsWorkout = ({}) => {
           showsVerticalScrollIndicator={false}
           numColumns={2}
           contentContainerStyle={{}}
+          style={{ marginBottom: 50 }}
           renderItem={({ item }) => {
             return <BodyPartsImages givenImage={item} />;
           }}

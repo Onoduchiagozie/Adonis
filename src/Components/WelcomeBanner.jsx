@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { UserProvider } from '../UserContext';
 
 const WelcomeBanner = () => {
   // Load the font using `useFonts`
-
+//const {user}=useContext(UserProvider);
   return (
     <View style={{}}>
       <View

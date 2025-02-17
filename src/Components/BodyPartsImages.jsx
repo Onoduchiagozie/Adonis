@@ -19,10 +19,11 @@ const BodyPartsImages = ({ givenImage }) => {
           className=" h-52 w-44"
           style={{
             resizeMode: 'stretch',
+
             backgroundColor: 'transparent',
             borderWidth: 5,
             borderRadius: 5,
-            marginTop: 20,
+            marginTop: 10,
             marginHorizontal: 25,
           }}
         />

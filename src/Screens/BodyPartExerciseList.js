@@ -24,6 +24,7 @@ const BodyPartExerciseList = ({ route }) => {
   useEffect(() => {
     // Function to fetch data from the API
     const fetchExercises = async () => {
+      setLoading(true);
       const options = {
         method: 'GET',
         url: `https://exercisedb.p.rapidapi.com/exercises/${encodeURIComponent(workout.selection)}/${encodeURIComponent(workout.name)}`,
@@ -35,11 +36,11 @@ const BodyPartExerciseList = ({ route }) => {
 
       try {
         const response = await axios.request(options);
-        setExercises(response.data); // Store fetched data in state
+        setExercises(response.data);
       } catch (error) {
         console.error('Error fetching exercises:', error);
       } finally {
-        setLoading(false); // Hide loader once request completes
+        setLoading(true); // Keep loading true even on error
       }
     };
 
@@ -62,10 +63,9 @@ const BodyPartExerciseList = ({ route }) => {
               fontWeight: 'bold',
               color: 'indigo',
               fontFamily: 'MouseMemoir',
-              marginLeft: 20,
             }}
           >
-            Select
+            Save
           </Text>
           <Image
             source={workout.imagePath}
@@ -84,7 +84,6 @@ const BodyPartExerciseList = ({ route }) => {
               marginTop: 20,
               marginLeft: 20,
               fontFamily: 'Oswald',
-              fontWeight: 'bold',
             }}
           >
             {exercises.length}{' '}
@@ -99,7 +98,7 @@ const BodyPartExerciseList = ({ route }) => {
           </Text>
 
           {loading ? (
-            <ActivityIndicator color={'white'} size={'large'} />
+            <ActivityIndicator animating="true" color="black" size={'large'} />
           ) : (
             <FlatList
               data={exercises}
@@ -119,11 +118,6 @@ const BodyPartExerciseList = ({ route }) => {
                   }}
                   onPress={() => {
                     console.log(item);
-                    // {"bodyPart": "back", "equipment": "barbell", "gifUrl": "https://v2.exercisedb.io/image/Ma-WDKWCNm45ed", "id": "0022", "instruc
-                    //   tions": ["Lie flat on a bench with your head at one end and your feet on the ground.", "Hold the barbell with a pronated grip (palms facing awa
-                    //   y from you) and extend your arms straight above your chest.", "Keeping your arms straight, lower the barbell behind your head in an arc-like mo
-                    //   tion until you feel a stretch in your lats.", "Pause for a moment, then reverse the motion and press the barbell back to the starting position
-                    //   above your chest.", "Repeat for the desired number of repetitions."], "name": "barbell pullover to press", "secondaryMuscles": ["triceps", "chest", "shoulders"], "target": "lats"}
                     navigation.navigate('ExerciseDetails', { exercise: item });
                   }}
                 >

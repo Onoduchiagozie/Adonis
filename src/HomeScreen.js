@@ -5,8 +5,6 @@ import ExerciseCategory from './Components/ExerciseCategory';
 import BodyPartsWorkout from './Components/BodyPartsWorkout';
 import { ScrollView } from 'react-native-virtualized-view';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading';
 
 function HomeScreen(props) {
   // const [fontsLoaded] = useFonts({
