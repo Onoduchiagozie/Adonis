@@ -1,45 +1,17 @@
 import { React, useState, useContext } from 'react';
-import { View, Text, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { ImageBackground } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ScrollView } from 'react-native-virtualized-view';
 import axios from 'axios';
 import { UserContext } from '../UserContext';
 import { BaseURL, tokenGlobal } from '../Constants';
 import { Icon } from 'react-native-paper';
+import { Alert } from 'react-native';
+import { addExercise } from '../ApiServices';
+
 const ExerciseDetails = ({ route }) => {
   const { exercise } = route.params;
-  console.log('here we go ', exercise, token);
-  const { token } = useContext(UserContext);
-
-  async function addExercise() {
-    const ExerciseDTO = {
-      ...exercise,
-      ExerciseId: exercise.id,
-      instructions: exercise.instructions.join(' | '), // Convert array to single string with separator
-      secondaryMuscles: exercise.secondaryMuscles.join(', '), // Convert array to comma-separated string
-    };
-    try {
-      const response = await axios.post(
-        `${BaseURL}Favourites/AddFavourite`,
-        JSON.stringify(ExerciseDTO),
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${tokenGlobal}`,
-          },
-        }
-      );
-      //add response to message body
-      Alert.alert(
-        'Exercise added!',
-        'Your exercise has been added to your favourites.'
-      );
-console.log(response.data)
-      return response.data;
-    } catch (error) {
-      console.error('Error adding exercise:', error.response);
-    }
-  }
 
   return (
     <LinearGradient
@@ -71,7 +43,7 @@ console.log(response.data)
           >
             <View style={{}}>
               <View>
-                <TouchableOpacity onPress={addExercise}>
+                <TouchableOpacity onPress={() => addExercise(exercise)}>
                   <Text
                     className="text-center uppercase underline"
                     style={{ fontSize: 18 }}
@@ -85,7 +57,7 @@ console.log(response.data)
                       }}
                     >
                       {exercise.bodyPart}
-                      <Icon name="heart" size={35} color="indigo" />
+                      {/*//     <Icon name="heart" size={35} color="indigo"  source={expo-icon}/>*/}
                     </Text>
                   </Text>
                 </TouchableOpacity>

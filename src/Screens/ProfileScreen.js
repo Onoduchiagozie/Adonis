@@ -7,64 +7,11 @@ import JWT from 'expo-jwt';
 import { BaseURL, secretKey, secretkey, tokenGlobal } from '../Constants';
 import axios from 'axios';
 import { ImageBackground } from 'expo-image';
+import { fetchFavourites, initializeUser } from '../ApiServices';
 const ProfileScreen = ({ route }) => {
   const [savedWorkout, setSaved] = useState([]);
   const { myCurrentUserObject, setUser, token } = useContext(UserContext);
-  const [profileUser, setProfileUser] = useState({});
   useEffect(() => {
-    const fetchFavourites = async () => {
-      try {
-        const response = await axios.get(
-          `${BaseURL}Favourites/GetUserFavourites`,
-          {
-            headers: { Authorization: `Bearer ${tokenGlobal}` },
-          }
-        );
-        console.log('Saved exercises are ', response.data);
-        setSaved(response.data);
-      } catch (error) {
-        console.error('Error fetching favourites:', error);
-      }
-    };
-
-    const initializeUser = async () => {
-      try {
-        console.log('P Token set:', tokenGlobal);
-
-        await AsyncStorage.setItem('auth_token', tokenGlobal);
-        try {
-          const decoded = JWT.decode(tokenGlobal, secretKey);
-          setProfileUser({
-            username: decoded.unique_name || 'Unknown',
-            email: decoded.email || 'No email provided',
-            goal: decoded.gender || 'No goal specified',
-            count: 22,
-          });
-
-          if (decoded && decoded.unique_name) {
-            console.log('decoded ', token);
-            try {
-              setUser({
-                username: decoded.unique_name || 'Unknown',
-                email: decoded.email || 'No email provided',
-                goal: decoded.gender || 'No goal specified',
-                count: 22,
-              });
-              console.log('Decoded payload:', decoded);
-            } catch (error) {
-              console.error('Error setuser to its state ', error);
-            }
-          } else {
-            console.log('Decoded token is invalid');
-          }
-        } catch (error) {
-          console.log('Error decoding token:', error);
-        }
-      } catch (error) {
-        console.error('Error storing token:', error);
-      }
-    };
-
     fetchFavourites();
     initializeUser();
   }, [token]);
@@ -86,11 +33,11 @@ const ProfileScreen = ({ route }) => {
     );
   }
 
-  const handlePress = (touchedWorkout) => {
-    fetchFavourites();
-    console.log(touchedWorkout);
-    // navigation.navigate('ExerciseDetails', { exercise: touchedWorkout });
-  };
+  // const handlePress = (touchedWorkout) => {
+  //   fetchFavourites();
+  //   console.log(touchedWorkout);
+  //   // navigation.navigate('ExerciseDetails', { exercise: touchedWorkout });
+  // };
 
   const FavoriteItem = ({ item }) => (
     //an indivual row of flatist
