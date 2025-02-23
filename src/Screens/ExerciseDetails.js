@@ -1,41 +1,40 @@
 import { React, useState, useContext } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, ImageBackground } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ScrollView } from 'react-native-virtualized-view';
-import { Video } from 'expo-av';
-import { Image, ImageBackground } from 'expo-image';
 import axios from 'axios';
 import { UserContext } from '../UserContext';
+import { BaseURL, tokenGlobal } from '../Constants';
+import { Icon } from 'react-native-paper';
 const ExerciseDetails = ({ route }) => {
   const { exercise } = route.params;
   console.log('here we go ', exercise, token);
   const { token } = useContext(UserContext);
 
   async function addExercise() {
-
-    const formattedExercise = {
-   
-          ...exercise,
-          ExerciseId: exercise.id,
-         // Ensure id is an integer
-          instructions: exercise.instructions.join(" | "), // Convert array to single string with separator
-          secondaryMuscles: exercise.secondaryMuscles.join(", ") // Convert array to comma-separated string
-      
-  };
-    const tempToken =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IlB1b0BnbWFpbC5jb20iLCJuYW1laWQiOiJjYTM0M2YwMC0zZmVjLTRmYTEtYWRkZC00ZGU2NjI3OTJlODIiLCJ1bmlxdWVfbmFtZSI6IlB1byIsImdlbmRlciI6IlNocmVkIiwibmJmIjoxNzQwMjQ4MDgwLCJleHAiOjE3NDAyNzMyODAsImlhdCI6MTc0MDI0MDg4MH0.lrZai_Wq2VEbVRDTgyrbpAJVEOzwMVsomh3KBJsmehc';
+    const ExerciseDTO = {
+      ...exercise,
+      ExerciseId: exercise.id,
+      instructions: exercise.instructions.join(' | '), // Convert array to single string with separator
+      secondaryMuscles: exercise.secondaryMuscles.join(', '), // Convert array to comma-separated string
+    };
     try {
       const response = await axios.post(
-        'http://192.168.100.67:5151/api/Favourites/AddFavourite',
-        JSON.stringify(formattedExercise),
+        `${BaseURL}Favourites/AddFavourite`,
+        JSON.stringify(ExerciseDTO),
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${tempToken}`,
+            Authorization: `Bearer ${tokenGlobal}`,
           },
         }
       );
-
+      //add response to message body
+      Alert.alert(
+        'Exercise added!',
+        'Your exercise has been added to your favourites.'
+      );
+console.log(response.data)
       return response.data;
     } catch (error) {
       console.error('Error adding exercise:', error.response);
@@ -86,6 +85,7 @@ const ExerciseDetails = ({ route }) => {
                       }}
                     >
                       {exercise.bodyPart}
+                      <Icon name="heart" size={35} color="indigo" />
                     </Text>
                   </Text>
                 </TouchableOpacity>

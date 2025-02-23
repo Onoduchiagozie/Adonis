@@ -1,27 +1,22 @@
-import React, { useContext, useState } from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AppLoading from 'expo-app-loading';
-
 import './global.css';
 import HomeScreen from './src/HomeScreen';
-import BodyPartExerciseList from './src/Screens/BodyPartExerciseList';
+
 import ExerciseDetails from './src/Screens/ExerciseDetails';
 import TimerScreen from './src/Screens/TimerScreen';
 import ProfileScreen from './src/Screens/ProfileScreen'; // Create this screen
-import { myUseFonts } from './src/useFonts';
 import { Ionicons } from '@expo/vector-icons'; // For tab icons
 import AuthScreen from './src/Screens/AuthScreen';
 import { UserProvider } from './src/UserContext';
+import { BodyPartExerciseList } from './src/Screens/BodyPartExerciseList';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [IsReady, SetIsReady] = useState(false);
-
   // Stack Navigator for the Home Tab
   function HomeStack() {
     return (
@@ -117,10 +112,6 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-// final notes ,
-//  1) token shoul dbe handled only in authscreen , adn anyother thing passed aound shoul dbe user profile
-//  2)conversion and checking of all if token ecists shojul donly be done in authscreen and , then token shoul dbe tsored just fo rsending request (only reason to use token after user auth)
 
 const styles = StyleSheet.create({
   container: {

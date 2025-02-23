@@ -4,22 +4,20 @@ import { UserContext } from './../UserContext';
 import { Button, Divider, TouchableRipple } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import JWT from 'expo-jwt';
-import { secretKey, secretkey } from '../Constants';
+import { BaseURL, secretKey, secretkey, tokenGlobal } from '../Constants';
 import axios from 'axios';
 import { ImageBackground } from 'expo-image';
 const ProfileScreen = ({ route }) => {
   const [savedWorkout, setSaved] = useState([]);
-  const tempToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IlB1b0BnbWFpbC5jb20iLCJuYW1laWQiOiJjYTM0M2YwMC0zZmVjLTRmYTEtYWRkZC00ZGU2NjI3OTJlODIiLCJ1bmlxdWVfbmFtZSI6IlB1byIsImdlbmRlciI6IlNocmVkIiwibmJmIjoxNzQwMjQ4MDgwLCJleHAiOjE3NDAyNzMyODAsImlhdCI6MTc0MDI0MDg4MH0.lrZai_Wq2VEbVRDTgyrbpAJVEOzwMVsomh3KBJsmehc';
   const { myCurrentUserObject, setUser, token } = useContext(UserContext);
   const [profileUser, setProfileUser] = useState({});
   useEffect(() => {
     const fetchFavourites = async () => {
       try {
         const response = await axios.get(
-          'http://192.168.100.67:5151/api/Favourites/GetUserFavourites',
+          `${BaseURL}Favourites/GetUserFavourites`,
           {
-            headers: { Authorization: `Bearer ${tempToken}` },
+            headers: { Authorization: `Bearer ${tokenGlobal}` },
           }
         );
         console.log('Saved exercises are ', response.data);
@@ -31,15 +29,14 @@ const ProfileScreen = ({ route }) => {
 
     const initializeUser = async () => {
       try {
-        console.log('P Token set:', token);
+        console.log('P Token set:', tokenGlobal);
 
-        await AsyncStorage.setItem('auth_token', tempToken);
-        //noooooooooooooooooooote T at time sit decodes without proper data  that is ehen the unkown is assign to it
+        await AsyncStorage.setItem('auth_token', tokenGlobal);
         try {
-          const decoded = JWT.decode(tempToken, secretKey);
+          const decoded = JWT.decode(tokenGlobal, secretKey);
           setProfileUser({
             username: decoded.unique_name || 'Unknown',
-            email: decoded.email || 'No email  provided',
+            email: decoded.email || 'No email provided',
             goal: decoded.gender || 'No goal specified',
             count: 22,
           });
@@ -72,7 +69,14 @@ const ProfileScreen = ({ route }) => {
     initializeUser();
   }, [token]);
 
-  console.log('User object ', profileUser, 'Savd workouts', savedWorkout);
+  console.log(
+    'User object ',
+    profileUser,
+    'another user ',
+    myCurrentUserObject,
+    'Savd workouts',
+    savedWorkout
+  );
 
   if (!profileUser) {
     return (
@@ -89,81 +93,60 @@ const ProfileScreen = ({ route }) => {
   };
 
   const FavoriteItem = ({ item }) => (
-    <TouchableOpacity
-      style={{
-        alignItems: 'center',
-        justifyContent: 'space-around',
-      }}
-      onPress={() => {
-        console.log(item);
-        navigation.navigate('ExerciseDetails', { exercise: item });
-      }}
-    >
-      <View style={{ padding: 10, backgroundColor: 'grey' }}>
-        <View
-          style={{
-            backgroundColor: '#fff',
-            borderRadius: 10,
-            overflow: 'hidden',
-            width: 200, // Adjust width as needed
-            margin: 10,
-            elevation: 5, // Adds shadow (Android)
-            shadowColor: '#000', // Adds shadow (iOS)
-            shadowOffset: { width: 2, height: 2 },
-            shadowOpacity: 0.2,
-            shadowRadius: 4,
+    //an indivual row of flatist
+    <View style={{ padding: 10 }}>
+      <View
+        style={{
+          borderRadius: 20,
+          overflow: 'hidden',
+          width: 160, // Adjust width as needed
+          margin: 10,
+          height: 300,
+          backgroundColor: '#fff',
+        }}
+      >
+        {/* Image Section */}
+        <TouchableOpacity
+          style={{}}
+          onPress={() => {
+            console.log(item);
+            navigation.navigate('ExerciseDetails', { exercise: item });
           }}
         >
-          {/* Image Section */}
           <ImageBackground
             source={{ uri: item.localImagePath }}
-            resizeMode="cover"
+            resizeMode="stretch"
             style={{
-              height: 150, // Adjust height as needed
+              height: 250,
               width: '100%',
             }}
           />
 
-          {/* Text/Details Section */}
           <View style={{ padding: 10 }}>
             <Text
               style={{
-                fontSize: 16,
-                fontWeight: 'bold',
-                color: '#000435',
-                textAlign: 'center',
-              }}
-            >
-              {item.name.length > 20
-                ? item.name.slice(0, 20) + '...'
-                : item.name}
-            </Text>
-
-            <Text
-              style={{
                 fontSize: 14,
-                color: '#555',
                 marginTop: 5,
                 textAlign: 'center',
+                color: 'blue',
               }}
             >
-              {item.target} | {item.equipment}
+              <Text style={{ color: 'indigo' }}>
+                {item.target
+                  .slice(0, 10)
+                  .split(' ')
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))}
+              </Text>{' '}
+              |{' '}
+              {item.equipment
+                .slice(0, 10)
+                .split(' ')
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))}
             </Text>
           </View>
-        </View>
-
-        <Text style={{ fontSize: 10, color: '#fff' }}>
-          {item.name
-            .split(' ')
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ')
-            .slice(0, 15)}
-          ...
-        </Text>
-        <Text style={{ fontSize: 14, color: 'purple' }}>{item.bodyPart}</Text>
-        <Text style={{ fontSize: 12, color: 'blue' }}>{item.equipment}</Text>
+        </TouchableOpacity>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 
   return (
@@ -174,10 +157,10 @@ const ProfileScreen = ({ route }) => {
           justifyContent: 'space-between',
           alignItems: 'center',
           height: '25%',
-          backgroundColor: 'red',
           padding: 16,
         }}
       >
+        //USERNAME ICON
         <View
           style={{
             width: 144,
@@ -198,6 +181,7 @@ const ProfileScreen = ({ route }) => {
             </Text>
           </TouchableOpacity>
         </View>
+        //USER DETAIL SSECTIONS
         <View
           style={{ flex: 1, marginRight: 20, justifyContent: 'space-between' }}
         >
@@ -220,11 +204,11 @@ const ProfileScreen = ({ route }) => {
           <Divider />
         </View>
       </View>
+
       <FlatList
         data={savedWorkout} // Ensure 'restaurants' is defined and imported appropriately
         renderItem={FavoriteItem}
         keyExtractor={(item) => item.name || `${item.gifUrl}`}
-        contentContainerStyle={{ padding: 5 }}
         numColumns={2}
         ListHeaderComponent={() => (
           <View>
@@ -237,7 +221,7 @@ const ProfileScreen = ({ route }) => {
                 color: '#fff',
               }}
             >
-              {profileUser.count} Saved workouts
+              {savedWorkout.length} Saved workouts
             </Text>
             <Divider style={{ marginBottom: 16 }} />
           </View>

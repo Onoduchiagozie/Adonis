@@ -13,7 +13,7 @@ import { ScrollView } from 'react-native-virtualized-view';
 import { ExcerciseDB_API_KEY } from '../Constants';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const BodyPartExerciseList = ({ route }) => {
+export const BodyPartExerciseList = ({ route }) => {
   const navigation = useNavigation();
   const { workout } = route.params;
 
@@ -39,11 +39,9 @@ const BodyPartExerciseList = ({ route }) => {
     }
   };
 
-
-
   console.log('theeeeeeeeeeeese', exercises);
   useEffect(() => {
-     const fetchExercises = async () => {
+    const fetchExercises = async () => {
       setLoading(true);
       const options = {
         method: 'GET',
@@ -89,11 +87,6 @@ const BodyPartExerciseList = ({ route }) => {
               Save
             </Text>
           </TouchableOpacity>
-
-
-
-
-     
 
           <Image
             source={workout.imagePath}
@@ -198,5 +191,3 @@ const BodyPartExerciseList = ({ route }) => {
     </LinearGradient>
   );
 };
-
-export default BodyPartExerciseList;
