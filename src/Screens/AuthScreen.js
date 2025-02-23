@@ -74,7 +74,7 @@ const AuthScreen = ({ navigation }) => {
     }
   };
   useEffect(() => {
-    console.log('Authscreen render token is :', token, 'sign in', isSignIn);
+    console.log('Authscreen render token is : ', token, 'sign in', isSignIn);
     if (token && isSignIn) {
       try {
         navigation.navigate('Profile');

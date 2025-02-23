@@ -1,14 +1,46 @@
-import React from 'react';
+import { React, useState, useContext } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ScrollView } from 'react-native-virtualized-view';
 import { Video } from 'expo-av';
 import { Image, ImageBackground } from 'expo-image';
-import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import axios from 'axios';
+import { UserContext } from '../UserContext';
 const ExerciseDetails = ({ route }) => {
   const { exercise } = route.params;
+  console.log('here we go ', exercise, token);
+  const { token } = useContext(UserContext);
+
+  async function addExercise() {
+
+    const formattedExercise = {
+   
+          ...exercise,
+          ExerciseId: exercise.id,
+         // Ensure id is an integer
+          instructions: exercise.instructions.join(" | "), // Convert array to single string with separator
+          secondaryMuscles: exercise.secondaryMuscles.join(", ") // Convert array to comma-separated string
+      
+  };
+    const tempToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IlB1b0BnbWFpbC5jb20iLCJuYW1laWQiOiJjYTM0M2YwMC0zZmVjLTRmYTEtYWRkZC00ZGU2NjI3OTJlODIiLCJ1bmlxdWVfbmFtZSI6IlB1byIsImdlbmRlciI6IlNocmVkIiwibmJmIjoxNzQwMjQ4MDgwLCJleHAiOjE3NDAyNzMyODAsImlhdCI6MTc0MDI0MDg4MH0.lrZai_Wq2VEbVRDTgyrbpAJVEOzwMVsomh3KBJsmehc';
+    try {
+      const response = await axios.post(
+        'http://192.168.100.67:5151/api/Favourites/AddFavourite',
+        JSON.stringify(formattedExercise),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${tempToken}`,
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      console.error('Error adding exercise:', error.response);
+    }
+  }
 
   return (
     <LinearGradient
@@ -40,21 +72,23 @@ const ExerciseDetails = ({ route }) => {
           >
             <View style={{}}>
               <View>
-                <Text
-                  className="text-center uppercase underline"
-                  style={{ fontSize: 18 }}
-                >
-                  {exercise.name} for{' '}
+                <TouchableOpacity onPress={addExercise}>
                   <Text
-                    style={{
-                      color: 'indigo',
-                      fontWeight: 'bold',
-                      fontFamily: 'Oswald',
-                    }}
+                    className="text-center uppercase underline"
+                    style={{ fontSize: 18 }}
                   >
-                    {exercise.bodyPart}
+                    {exercise.name} for{' '}
+                    <Text
+                      style={{
+                        color: 'indigo',
+                        fontWeight: 'bold',
+                        fontFamily: 'Oswald',
+                      }}
+                    >
+                      {exercise.bodyPart}
+                    </Text>
                   </Text>
-                </Text>
+                </TouchableOpacity>
               </View>
             </View>
 

@@ -25,58 +25,56 @@ export default function App() {
   // Stack Navigator for the Home Tab
   function HomeStack() {
     return (
-      <UserProvider>
-        <Stack.Navigator
-          initialRouteName="AuthScreen"
-          screenOptions={{
-            headerShown: false,
+      <Stack.Navigator
+        initialRouteName="HomePage"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="HomePage" component={HomeScreen} />
+        <Stack.Screen
+          name="BodyPartExerciseList"
+          component={BodyPartExerciseList}
+          options={{
+            headerShown: true,
+            title: ' ',
+            headerTransparent: true,
           }}
-        >
-          <Stack.Screen name="HomePage" component={HomeScreen} />
-          <Stack.Screen
-            name="BodyPartExerciseList"
-            component={BodyPartExerciseList}
-            options={{
-              headerShown: true,
-              title: ' ',
-              headerTransparent: true,
-            }}
-          />
-          <Stack.Screen
-            name="ExerciseDetails"
-            component={ExerciseDetails}
-            options={{
-              headerShown: true,
-              title: '',
-              headerTransparent: true,
-              headerRight: (props) => (
-                <Pressable
-                  style={{ marginRight: 190 }}
-                  android_ripple={{
-                    color: '#666666',
-                    foreground: true,
-                    borderless: true,
-                  }}
-                  onPress={() => {
-                    console.log('added to favourite');
-                  }}
-                >
-                  <Ionicons name="heart" size={35} color="indigo" />
-                </Pressable>
-              ),
-            }}
-          />
-          <Stack.Screen name="TimerScreen" component={TimerScreen} />
-          <Stack.Screen name="Profile" component={ProfileScreen} />
-          <Stack.Screen name="AuthScreen" component={AuthScreen} />
-        </Stack.Navigator>
-      </UserProvider>
+        />
+        <Stack.Screen
+          name="ExerciseDetails"
+          component={ExerciseDetails}
+          options={{
+            headerShown: true,
+            title: '',
+            headerTransparent: true,
+            headerRight: (props) => (
+              <Pressable
+                style={{ marginRight: 190 }}
+                android_ripple={{
+                  color: '#666666',
+                  foreground: true,
+                  borderless: true,
+                }}
+                onPress={() => {
+                  console.log('added to favourite');
+                }}
+              >
+                <Ionicons name="heart" size={35} color="indigo" />
+              </Pressable>
+            ),
+          }}
+        />
+        <Stack.Screen name="TimerScreen" component={TimerScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="AuthScreen" component={AuthScreen} />
+      </Stack.Navigator>
     );
   }
 
   return (
-    <UserProvider>
-      <NavigationContainer>
+    <NavigationContainer>
+      <UserProvider>
         <Tab.Navigator
           screenOptions={({ route }) => ({
             headerShown: false,
@@ -115,12 +113,14 @@ export default function App() {
             }}
           />
         </Tab.Navigator>
-      </NavigationContainer>
-    </UserProvider>
+      </UserProvider>
+    </NavigationContainer>
   );
 }
 
-// Import your global CSS file
+// final notes ,
+//  1) token shoul dbe handled only in authscreen , adn anyother thing passed aound shoul dbe user profile
+//  2)conversion and checking of all if token ecists shojul donly be done in authscreen and , then token shoul dbe tsored just fo rsending request (only reason to use token after user auth)
 
 const styles = StyleSheet.create({
   container: {

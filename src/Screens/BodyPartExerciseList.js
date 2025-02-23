@@ -21,9 +21,29 @@ const BodyPartExerciseList = ({ route }) => {
   const [exercises, setExercises] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const addExercise = async (exerciseData) => {
+    const options = {
+      method: 'POST',
+      url: 'http://192.168.100.67:5151/api/AddFavourite', // Adjust the endpoint based on your API's route
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: exercises, // Send the exercise object
+    };
+
+    try {
+      await axios.request(options);
+      alert('Exercise added successfully');
+    } catch (error) {
+      console.error('Error adding exercise:', error);
+    }
+  };
+
+
+
+  console.log('theeeeeeeeeeeese', exercises);
   useEffect(() => {
-    // Function to fetch data from the API
-    const fetchExercises = async () => {
+     const fetchExercises = async () => {
       setLoading(true);
       const options = {
         method: 'GET',
@@ -40,7 +60,7 @@ const BodyPartExerciseList = ({ route }) => {
       } catch (error) {
         console.error('Error fetching exercises:', error);
       } finally {
-        setLoading(true); // Keep loading true even on error
+        setLoading(false); // Keep loading true even on error
       }
     };
 
@@ -56,17 +76,25 @@ const BodyPartExerciseList = ({ route }) => {
     >
       <ScrollView>
         <View style={{ marginTop: 50, flex: 1 }} className="mt-6">
-          <Text
-            className="text-center "
-            style={{
-              fontSize: 30,
-              fontWeight: 'bold',
-              color: 'indigo',
-              fontFamily: 'MouseMemoir',
-            }}
-          >
-            Save
-          </Text>
+          <TouchableOpacity onPress={addExercise}>
+            <Text
+              className="text-center "
+              style={{
+                fontSize: 30,
+                fontWeight: 'bold',
+                color: 'indigo',
+                fontFamily: 'MouseMemoir',
+              }}
+            >
+              Save
+            </Text>
+          </TouchableOpacity>
+
+
+
+
+     
+
           <Image
             source={workout.imagePath}
             style={{
@@ -98,7 +126,7 @@ const BodyPartExerciseList = ({ route }) => {
           </Text>
 
           {loading ? (
-            <ActivityIndicator animating="true" color="black" size={'large'} />
+            <ActivityIndicator color="black" size={'large'} />
           ) : (
             <FlatList
               data={exercises}

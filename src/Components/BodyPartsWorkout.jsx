@@ -10,7 +10,7 @@ const BodyPartsWorkout = ({}) => {
   return (
     <View className="" style={{}}>
       <Text
-        className=" text-center  italic "
+        className=" text-center  italic"
         style={{ fontSize: 30, fontWeight: 'bold' }}
       >
         Body
